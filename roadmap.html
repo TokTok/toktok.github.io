@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The TokTok Project - Roadmap</title>
+  <meta name="description" content="This is a timeless roadmap for current and upcoming TokTok projects. It isordered by time and priority, but no times are assigned. Some of theseprojects are ...">
+  <link rel="canonical" href="https://toktok.ltd/roadmap.html">
+
+  
+  
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="static/css/style.css" media="screen">
+
+  
+</head>
+
+  <body>
+    <nav class="navbar">
+  <div class="container-fluid limit-width">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <span class="fab fa-earlybirds"></span>
+        <span class="text">TokTok</span>
+      </a>
+      <input type="checkbox" id="hambox" class="navbar-toggle collapsed">
+      <label id="hamlabel" class="navbar-toggle collapsed fas fa-bars" for="hambox"></label>
+      <div class="tinynav navbar-toggle collapsed">
+        <ul class="nav navbar-nav">
+         
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+        </ul>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="content">
+      <div class="container-fluid limit-width lead">
+        <p>This is a timeless roadmap for current and upcoming TokTok projects. It is
+ordered by time and priority, but no times are assigned. Some of these
+projects are part of the <a href="designs/plan.html">startup phases</a>. The more
+advanced milestones will be started after the project has achieved some
+stability.</p>
+
+<p>A concrete roadmap built from GitHub issues and pull requests can be found here:</p>
+
+<ul>
+  <li><a href="roadmap/c-toxcore.html">c-toxcore</a></li>
+</ul>
+
+<p>The milestones presented here are flexible. Priorities might change in the
+future as the landscape shifts and our target audience requires features at
+different times.</p>
+
+<h2 id="basic-functionality">Basic functionality</h2>
+
+<ul>
+  <li>Complete <a href="https://github.com/TokTok/spec">Tox protocol specification</a>.</li>
+  <li>Write a Haskell <a href="https://github.com/TokTok/hs-toxcore">model
+implementation</a> of the Tox protocol
+and <a href="designs/testing.html">tests</a> for other implementations.</li>
+  <li>Write a Rust <a href="https://github.com/tox-rs/tox">implementation</a> of the Tox
+protocol.</li>
+</ul>
+
+<h2 id="feature-parity-with-toxcore">Feature parity with toxcore</h2>
+
+<ul>
+  <li>Create a toxcore-compatible layer for C on top of either the Haskell or
+the Rust implementation.</li>
+  <li>Create a very simple client directly on top of the protocol implementation
+(not on the C wrapper).</li>
+</ul>
+
+<h2 id="basic-mobile-support">Basic mobile support</h2>
+
+<ul>
+  <li>Rewrite or merge <a href="https://github.com/TokTok/toktok-android">TokTok</a> and
+<a href="https://github.com/Antox/Antox">Antox</a> Android clients.</li>
+  <li>Adopt <a href="https://github.com/Antidote-for-Tox/Antidote">Antidote</a> and use it
+with our Tox implementations.</li>
+</ul>
+
+<h2 id="optimisations-for-mobile">Optimisations for mobile</h2>
+
+<ul>
+  <li>Implement simple multi-client profile and message log synchronisation.</li>
+  <li>Implement simple offline messaging using Freenet or federated servers.</li>
+  <li>Optimise network traffic usage.</li>
+</ul>
+
+<h2 id="high-level-tox-protocol">High level Tox protocol</h2>
+
+<ul>
+  <li>Create a specification and model implementation for the Middle Level Tox
+Protocol with support for:
+    <ul>
+      <li>Prioritisation (and
+<a href="https://en.wikipedia.org/wiki/Type_of_service">ToS</a>)</li>
+      <li>Streaming (like TCP)</li>
+      <li>Reliable (for messaging), unreliable (for audio), and mixed (for
+video: reliable key frames, unreliable rest) data transmission</li>
+    </ul>
+  </li>
+  <li>Create application protocols on top of the MLTP for messaging, file
+transfers, audio/video, etc.</li>
+  <li>Write a Haskell model implementation and extend the test framework to
+include MLTP and the application protocols.</li>
+  <li>Implement the protocols in Rust.</li>
+</ul>
+
+<h2 id="shift-to-hlapi">Shift to HLAPI</h2>
+
+<p>HLAPI: High Level API for Tox.</p>
+
+<ul>
+  <li>Rewrite common logic from Antox and Antidote in an implementation directly
+above the protocol implementation.</li>
+  <li>Adapt TokTok or Antox to use the HLAPI.</li>
+  <li>Adapt Antidote to use the HLAPI.</li>
+</ul>
+
+<h2 id="desktop-support">Desktop support</h2>
+
+<ul>
+  <li>Build a new desktop client or adopt an existing one and adapt it to use
+the HLAPI.</li>
+</ul>
+
+<h2 id="additional-features">Additional features</h2>
+
+<ul>
+  <li>Add support for stickers, location sharing, etc. to reach feature parity
+with popular instant messengers.</li>
+</ul>
+
+<h2 id="distributed-file-system">Distributed file system</h2>
+
+<ul>
+  <li>Build a distributed file system (or more abstractly, a data store) on top
+of Tox friend connections and multi-device support. The main challenge
+here is that most nodes are untrusted.</li>
+  <li>Implement improved profile and message log synchronisation and offline
+messaging on top of the distributed data store.</li>
+</ul>
+
+<h2 id="distributed-computation">Distributed computation</h2>
+
+<ul>
+  <li>Build a distributed untrusted computation system using the distributed
+data store as both permanent and temporary storage.</li>
+  <li>Implement message log search in the distributed computation system.</li>
+</ul>
+
+      </div>
+    </section>
+    
+    
+    
+  </body>
+  <footer id="footer" class="dark">
+  <div class="container-fluid limit-width">
+    <div class="languages"></div>
+
+    <div class="ext-med pull-left">
+      <a class="button" href="https://github.com/TokTok/c-toxcore" title="Star us on Github"><span class="icon fab fa-github"></span></a>
+      <a class="button" href="https://wiki.tox.chat/users/community#irc" title="Chat with us on IRC"><span class="icon fas fa-comments"></span></a>
+      <a class="button do-button" href="https://www.digitalocean.com/" title="Powered by DigitalOcean"><img class="button" src="static/img/do.svg" /></a>
+    </div>
+
+    <div class="cc pull-right">
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="static/img/CC.png"></a>
+      <br>
+      <p>This page was generated from
+        <a href="https://github.com/TokTok/website">
+          a file hosted in public GitHub repository
+        </a>
+        — issue tickets and pull requests are very welcome!
+      </p>
+    </div>
+  </div>
+</footer>
+
+</html>

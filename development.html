@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The TokTok Project - Development process</title>
+  <meta name="description" content="Tox and TokTok are software projects with very high security and stabilityrequirements. It will potentially be used by hundreds of millions of peoplearound t...">
+  <link rel="canonical" href="https://toktok.ltd/development.html">
+
+  
+  
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="static/css/style.css" media="screen">
+
+  
+</head>
+
+  <body>
+    <nav class="navbar">
+  <div class="container-fluid limit-width">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <span class="fab fa-earlybirds"></span>
+        <span class="text">TokTok</span>
+      </a>
+      <input type="checkbox" id="hambox" class="navbar-toggle collapsed">
+      <label id="hamlabel" class="navbar-toggle collapsed fas fa-bars" for="hambox"></label>
+      <div class="tinynav navbar-toggle collapsed">
+        <ul class="nav navbar-nav">
+         
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+        </ul>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="content">
+      <div class="container-fluid limit-width lead">
+        <p>Tox and TokTok are software projects with very high security and stability
+requirements. It will potentially be used by hundreds of millions of people
+around the world. A security issue could have catastrophic consequences.
+Slightly less critical, but still very important, is stability. If the library
+underlying our chat clients is unstable, it’s annoying in the mildest case, and
+can be catastrophic to a single person (imagine the code arbitrarily deleting
+chat histories).</p>
+
+<p>Therefore, toktok-team operates in a slightly different way from most open
+source projects. We have strict design and code review processes that no
+contributor, including the project owners, can violate. Github branch
+protection ensures that the review process is followed.</p>
+
+<p>For any non-trivial development, we follow a rigorous design process. This
+process ensures that every decision is founded in reason and that at least some
+alternatives for the decisions have been considered. We split the design into
+two stages with a document accompanying each stage.</p>
+
+<h2 id="goals-requirements-overview">Goals, requirements, overview</h2>
+
+<p>The first stage is the design overview. This document contains the high level
+overview of a design. It starts by answering the following questions:</p>
+
+<ul>
+  <li>What is the current state of the world? We describe a problem and outline
+a solution with the currently available technology. This establishes the
+background for our design.</li>
+  <li>What do we want the world to look like? This part describes at a high
+level what the new technology is intended to do, what problems it solves,
+and in particular, how the problem described in the previous section will
+be solved in a better way using this new technology.</li>
+  <li>What are the goals of this design?</li>
+  <li>Where does the scope of our design end? What is <em>not</em> a goal of this
+design?</li>
+</ul>
+
+<p>Next comes a list of requirements. For example:</p>
+
+<ul>
+  <li>What kind of data sizes does our system operate on?</li>
+  <li>How reliable does it need to be?</li>
+  <li>How general or how specific does it need to be?</li>
+  <li>How extensible does it need to be?</li>
+</ul>
+
+<p>The largest section of this document is the high level design overview. Here we
+describe, without going into implementation details, what components the
+solution will be comprised of, how they interact, and how they depend on each
+other. For tooling, this may include usage examples. For code, this won’t
+necessarily include API definitions. This part may discuss storage choices,
+protocol choices, and other high level design ideas.</p>
+
+<p>Finally, the document includes a section discussing alternative approaches. The
+discussion gives a short description of a technology that solves a similar
+problem to ours, provides a link to the documentation of that technology, and
+points out reasons for not choosing it.</p>
+
+<p>This document forms the basis for discussion, and we require at least one
+reviewer (if possible, two reviewers) to sign off on the idea. Ideally, we have
+many more people commenting and suggesting on the document.</p>
+
+<p>You can use our <a href="designs/template.html">design overview template</a> or write
+your own. If you are unsure which direction you want to go in, writing small
+prototypes is a good way of exploring the space you are designing your project
+in. A prototype typically takes about a day to implement. If you take
+significantly more time, it will turn into a full implementation. Prototypes
+should be code you can throw away easily.</p>
+
+<h2 id="detailed-technical-design">Detailed technical design</h2>
+
+<p>After going through several iterations of discussion and improvement, the rough
+design is expanded to become a full technical design. This is a separate
+document, which may initially be a copy of the above document. It specifies the
+APIs in detail, with message types, effects, and result types. These can be
+language-specific or language-agnostic such as web or RPC APIs. The evolution
+of this document usually goes hand in hand with the actual implementation.</p>
+
+<h2 id="writing-code">Writing code</h2>
+
+<p>In many open source projects, the people with write access to the source code
+repository will submit code frequently and break things in the process. The
+breakage is then hopefully resolved. In contrast, toktok-team does not allow a
+single line of code (or documentation) to enter the master branch of the main
+repositories without being reviewed by at least one member that did not write
+the code. This means that even toktok-team members cannot push arbitrary
+unreviewed code to the repository.</p>
+
+<p>If you want to contribute code or documentation, you will go through the normal
+Github process of forking the repository and opening a pull request. One or
+more reviewers from toktok-team will read and comment on your submission. You
+will most likely receive actionable feedback, which you can discuss on the
+review. You can then add more commits to the review by pushing them to the pull
+request branch.</p>
+
+<p>A continuous integration system will build the code for all supported platforms
+and run an exhaustive testsuite on the x86_64 platform to increase confidence
+in the changes. We require close to 100% test coverage. The only exceptions are
+some cases of trivial generated code (Haskell <code class="highlighter-rouge">deriving</code>) and unreachable code
+caused by unavoidable weaknesses in the type system.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>Code review
+    <ul>
+      <li>Reviewable for code reviews.</li>
+      <li>Every PR is required to go through review, no commits can be made
+directly to the master branch without review (Github branch
+protection).</li>
+      <li>No branches other than master on the main repositories; contributors
+work on their own forks.</li>
+    </ul>
+  </li>
+  <li>Testing
+    <ul>
+      <li><a href="https://travis-ci.com">Travis</a> for continuous integration.</li>
+      <li><a href="https://coveralls.io">Coveralls</a> for test coverage recording.</li>
+      <li>Github branch protection requires CI tests to pass and coverage to not
+decrease before merge.</li>
+      <li>If multiple repositories: core CI must run client tests.</li>
+    </ul>
+  </li>
+  <li>Repository: we use multiple repos instead of one large one
+    <ul>
+      <li>Separation of Github issue trackers.</li>
+      <li>Separate permissions (alleviated a bit by strict code review).</li>
+      <li>Git submodules could be used to track and cross test client and
+toxcore to verify that each compile with each other.</li>
+    </ul>
+  </li>
+  <li>Release plan
+    <ul>
+      <li>Rolling release (everybody develops on HEAD).</li>
+      <li>Support horizon: 4 weeks of backwards compatibility, ensured using the
+test suite from 4 weeks ago.</li>
+      <li>No public releases (for now) to encourage focus within the project.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="standards">Standards</h2>
+
+<p>We will hold ourselves and our contributors to high standards. Therefore, we
+require:</p>
+
+<ul>
+  <li>Every function, macro, global constant, type, and aggregate member should
+be documented. Documentation may be omitted if
+    <ul>
+      <li>the entity is not part of the module’s public API,</li>
+      <li>the entity is trivial, and</li>
+      <li>the context sufficiently explains the purpose.</li>
+    </ul>
+  </li>
+  <li>Commits should explain what their purpose is. Don’t just say what you’re
+doing, but also why.</li>
+  <li>Every function must have 100% branch coverage in tests. This is a superset
+of line coverage where every condition must have been both true and false
+within the test run. In Haskell, 100% expression coverage is required,
+meaning every sub-expression must have been fully evaluated at one point.
+HPC (Haskell Program Coverage) under-reports coverage, so the 100% won’t
+be automatically measurable. In C, expression coverage is not measurable.</li>
+</ul>
+
+<p>As always, every standard is subject to personal judgement, so if a rule does
+not make sense in a certain situation, you’re free to ignore it, so long as
+you’re able to justify your reasoning.</p>
+
+<h2 id="repositories">Repositories</h2>
+
+<p>We have three main repositories:</p>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore">c-toxcore</a> is the stable C toxcore
+implementation we maintain. This repository applies strict contribution
+rules and new features cannot enter unless they comply with the standards.</li>
+  <li><a href="https://github.com/TokTok/hs-toxcore">hs-toxcore</a> is the Haskell test
+framework used to validate the C toxcore implementation. This validation
+involves implementing most of the protocol specification, so by the end
+this will be for the most part a reference implementation. This repository
+also contains the specification itself.</li>
+  <li><a href="https://github.com/TokTok/spec">spec</a> contains a non-golden Markdown
+version of the specification. Contributors may make PRs to this
+repository, which will then be ported back into the hstox repository.</li>
+</ul>
+
+<h2 id="stepwise-howto-for-a-contribution">Stepwise howto for a contribution</h2>
+
+<ul>
+  <li>Fork the repository you want to contribute to on Github.</li>
+  <li>Make a new branch in their own repository, named as you like (usually
+according to the topic you are working on).</li>
+  <li>Push a commit to your new branch.</li>
+  <li>PGP signed commits are strongly suggested, but not required.</li>
+  <li>Make a PR (pull request) on Github.</li>
+  <li>Amend your commit with changes as you go along.</li>
+  <li>When you feel you’re ready, ask for a review, @mentioning the person you’d
+like as a reviewer.</li>
+  <li>The reviewer will take up to 72 hours to reply. This reply may consist of
+“I’m reviewing it” or similar, if they think it takes more time to go
+through everything.</li>
+  <li>If a review goes stale, comment on the PR and/or come talk on IRC in
+#toktok or #tox-dev.</li>
+</ul>
+
+      </div>
+    </section>
+    
+    
+    
+  </body>
+  <footer id="footer" class="dark">
+  <div class="container-fluid limit-width">
+    <div class="languages"></div>
+
+    <div class="ext-med pull-left">
+      <a class="button" href="https://github.com/TokTok/c-toxcore" title="Star us on Github"><span class="icon fab fa-github"></span></a>
+      <a class="button" href="https://wiki.tox.chat/users/community#irc" title="Chat with us on IRC"><span class="icon fas fa-comments"></span></a>
+      <a class="button do-button" href="https://www.digitalocean.com/" title="Powered by DigitalOcean"><img class="button" src="static/img/do.svg" /></a>
+    </div>
+
+    <div class="cc pull-right">
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="static/img/CC.png"></a>
+      <br>
+      <p>This page was generated from
+        <a href="https://github.com/TokTok/website">
+          a file hosted in public GitHub repository
+        </a>
+        — issue tickets and pull requests are very welcome!
+      </p>
+    </div>
+  </div>
+</footer>
+
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The TokTok Project - Tox Core Test Framework</title>
+  <meta name="description" content="Language independent fuzzing and unit testing for Tox implementations# ObjectiveThe goal of this project is to create a language-neutral test framework toval...">
+  <link rel="canonical" href="https://toktok.ltd/designs/testing.html">
+
+  
+  
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="../static/css/style.css" media="screen">
+
+  
+</head>
+
+  <body>
+    <nav class="navbar">
+  <div class="container-fluid limit-width">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">
+        <span class="fab fa-earlybirds"></span>
+        <span class="text">TokTok</span>
+      </a>
+      <input type="checkbox" id="hambox" class="navbar-toggle collapsed">
+      <label id="hamlabel" class="navbar-toggle collapsed fas fa-bars" for="hambox"></label>
+      <div class="tinynav navbar-toggle collapsed">
+        <ul class="nav navbar-nav">
+         
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="../mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+        </ul>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="../mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="content">
+      <div class="container-fluid limit-width lead">
+        <p>Language independent fuzzing and unit testing for Tox implementations</p>
+
+<h2 id="objective">Objective</h2>
+
+<p>The goal of this project is to create a language-neutral test framework to
+validate any <a href="../spec.html">Tox Core Protocol</a> implementation, including the C
+reference implementation <a href="https://github.com/toktok/c-toxcore">libtoxcore</a>.
+We aim to create an exhaustive test suite using this framework to ensure
+compatibility and correctness of all protocol implementations. The test suite
+aims to provide validation, not verification, meaning we do not aim to prove
+any properties of the specification or implementations. We aim to supplement
+the implementation-specific test suite, not to replace it. Unit tests inside
+the implementation test suite are still important. The framework and test
+suite implemented here enables some form of test-driven development. We target
+the functional subset of implementations and do not test I/O, so integration
+tests validating the networking part of a protocol implementation will remain
+vital to its confidence in correctness. A secondary goal is to improve the
+protocol specification with findings from its model implementation.</p>
+
+<h2 id="background">Background</h2>
+
+<p>The C implementation has a suite of unit tests and some integration tests. The
+unit tests are non-exhaustive and the integration tests too high-level.
+Finding specific bugs or regressions is currently difficult. The tests were
+also written by the same person who wrote the tested code. This tends to lead
+to implementation-guided tests, which easily omits some corner cases.</p>
+
+<p>Testing new implementations such as <a href="https://github.com/tox-rs/tox">tox-rs/tox</a>
+and <a href="https://github.com/TokTok/hs-toxcore">HsTox</a> involves implementing
+networking and having it communicate with an existing Tox node running the C
+reference implementation. Doing automated tests of this kind is costly, as it
+requires running a Tox node and establishing a connection to it.  These tests
+are also necessarily stateful and non-deterministic, because they run in a
+Tox network. Hermetic tests are therefore difficult to achieve.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>The test framework must be language-independent and easy to adopt. We do not
+aim to provide any support libraries, so the API must be straightforward to
+implement without additional dependencies.</p>
+
+<p>A combination of <a href="https://en.wikipedia.org/wiki/QuickCheck">property-based
+tests</a> and example-based tests
+(classical unit tests) helps ensuring that known corner cases are caught and
+previously unknown cases are identified. It also helps solidifying the Tox
+Protocol Specification.</p>
+
+<p>We require 100% functional test coverage for the model implementation,
+exempting unreachable code caused by weaknesses in the implementation language
+or libraries used.</p>
+
+<p>We aim for close to 100% functional test coverage of libtoxcore achieved
+purely using our test suite, ignoring the libtoxcore test suite itself.
+Achieving this gives us reasonable confidence that all cases are covered in
+the test suite and helps future alternative implementations achieve feature
+parity. Exemptions are functions performing I/O.</p>
+
+<p>All tests in the suite must be linked back to a paragraph in the protocol
+specification. If a test is required has no clear reason in the specification,
+that means the protocol is underspecified and the specification must be
+improved.</p>
+
+<p>Tests must be skippable as “Not Implemented” so that a partial implementation
+can use the test suite as validation in its continuous implementation/test
+cycle. Unimplemented parts should not count as failures.</p>
+
+<p>Tests should run in a reasonable amount of time (seconds, or up to a minute).
+All tests are purely computational, so they can run fast. Fast tests allow for
+continuous testing during implementation.</p>
+
+<p>All test results must be completely deterministic and defined purely as a
+function of their inputs. This means that any code that relies on I/O will
+remain untested and must be tested in the implementation-specific test suite.
+This includes networking, but also any functionality that relies on
+randomness.  Notably this includes generating key pairs and nonces. Tests that
+involve cryptography must therefore supply known and deterministic keys and
+nonces.</p>
+
+<h2 id="design-ideas">Design Ideas</h2>
+
+<p>The test framework consists of a model implementation and a test runner both
+written in Haskell. A “system under test” (SUT) is a protocol implementation
+that is tested by the test runner. The SUT is presented to the test runner as
+a standalone executable that communicates with it using pipes.</p>
+
+<p>Haskell was chosen as an implementation language due to its strong compile
+time guarantees and its ability to succinctly express run time behaviour. Most
+importantly, none of the model functions are allowed to be in the IO or any
+concurrency monad, ensuring their purity and therefore determinism.</p>
+
+<h3 id="test-kinds">Test kinds</h3>
+
+<p>As part of a test run, the model implementation itself is validated against
+properties, and the system under test is validated against the model’s test
+results.</p>
+
+<p><a href="https://hspec.github.io/">Hspec</a> will be used to write the test
+specification.  Every Haskell module <code class="highlighter-rouge">M</code> will have an associated <code class="highlighter-rouge">${M}Spec</code>
+module that by itself achieves 100% expression coverage for that particular
+module. Top level declaration coverage will be relaxed, as we can assume that
+“deriving” does the right thing. For each Haskell module <code class="highlighter-rouge">M</code> that supports
+testing the SUT, a module <code class="highlighter-rouge">${M}ExtSpec</code> contains the tests that run against
+SUTs.</p>
+
+<p><a href="https://hackage.haskell.org/package/QuickCheck">QuickCheck</a> will be used for
+the property-based tests. The base of the Tox protocol is the data structures
+representing packet contents. Reading and writing functions will be tested in
+terms of each other (<code class="highlighter-rouge">read(write(x)) == x</code>), and all reading functions will be
+tested with arbitrary byte arrays as input to increase confidence in their
+reliability. I.e. if the model implementation rejects a byte array, then the
+SUT’s implementation must also reject it. We intentionally reject the
+<a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness principle</a>
+here and require strict conformance from the SUT.</p>
+
+<h3 id="execution">Execution</h3>
+
+<p>The test runner automatically discovers SUT executables in the “test”
+subdirectory. Each test execution will be run on all SUTs found there in
+sequence. The test runner considers a test successful if and only if all SUTs
+return the same (correct) result.</p>
+
+<p>Each test launches a new instance of the SUT executable in a separate process.
+Standard input and output are used to communicate with it. The test runner
+provides test data on the process’ standard input and reads the test results
+from its standard output. Running one instance of the executable per test
+helps ensure hermetic testing, as the implementation can’t keep state (other
+than by performing I/O, which is highly discouraged in tests).</p>
+
+<h3 id="test-protocol">Test protocol</h3>
+
+<p>All integers are represented in Big Endian. The test protocol is specified as
+follows:</p>
+
+<h4 id="test-data-suts-stdin">Test Data (SUT’s stdin)</h4>
+
+<p>The test input is a length-prefixed test name and an arbitrary piece of data.
+The meaning of that data depends on the test name.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>length</td>
+      <td><code class="highlighter-rouge">Int</code></td>
+      <td>8 bytes</td>
+    </tr>
+    <tr>
+      <td>test name</td>
+      <td><code class="highlighter-rouge">String</code></td>
+      <td><code class="highlighter-rouge">$length</code> bytes</td>
+    </tr>
+    <tr>
+      <td>test data</td>
+      <td><code class="highlighter-rouge">Bytes</code></td>
+      <td>Depends on test name</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="test-result-suts-stdout">Test Result (SUT’s stdout)</h4>
+
+<p>In case of error, a <code class="highlighter-rouge">Failure</code> message is returned:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x00 (<code class="highlighter-rouge">Failure</code>)</td>
+      <td><code class="highlighter-rouge">Tag</code></td>
+      <td>1 byte</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td><code class="highlighter-rouge">Int</code></td>
+      <td>8 bytes</td>
+    </tr>
+    <tr>
+      <td>error message</td>
+      <td><code class="highlighter-rouge">String</code></td>
+      <td><code class="highlighter-rouge">$length</code> bytes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In case of success, an arbitrary piece of data is returned, depending on the
+test name in the input.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x01 (<code class="highlighter-rouge">Success</code>)</td>
+      <td><code class="highlighter-rouge">Tag</code></td>
+      <td>1 byte</td>
+    </tr>
+    <tr>
+      <td>result data</td>
+      <td><code class="highlighter-rouge">Bytes</code></td>
+      <td>Depends on test name</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Tests can be skipped by sending a <code class="highlighter-rouge">Skipped</code> result. These tests will be
+ignored and reported as successful.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x02 (<code class="highlighter-rouge">Skipped</code>)</td>
+      <td><code class="highlighter-rouge">Tag</code></td>
+      <td>1 byte</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="reference-cross-validation">Reference cross-validation</h3>
+
+<p>The tests implemented here have little confidence in correctness unless they
+are themselves validated against the reference implementation in libtoxcore.
+Part of ensuring that the tests themselves conform to the specification
+involves implementing the test protocol in terms of libtoxcore.</p>
+
+<h2 id="alternatives-considered">Alternatives Considered</h2>
+
+<p>TODO (none yet).</p>
+
+      </div>
+    </section>
+    
+    
+    
+  </body>
+  <footer id="footer" class="dark">
+  <div class="container-fluid limit-width">
+    <div class="languages"></div>
+
+    <div class="ext-med pull-left">
+      <a class="button" href="https://github.com/TokTok/c-toxcore" title="Star us on Github"><span class="icon fab fa-github"></span></a>
+      <a class="button" href="https://wiki.tox.chat/users/community#irc" title="Chat with us on IRC"><span class="icon fas fa-comments"></span></a>
+      <a class="button do-button" href="https://www.digitalocean.com/" title="Powered by DigitalOcean"><img class="button" src="../static/img/do.svg" /></a>
+    </div>
+
+    <div class="cc pull-right">
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="../static/img/CC.png"></a>
+      <br>
+      <p>This page was generated from
+        <a href="https://github.com/TokTok/website">
+          a file hosted in public GitHub repository
+        </a>
+        — issue tickets and pull requests are very welcome!
+      </p>
+    </div>
+  </div>
+</footer>
+
+</html>

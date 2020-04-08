@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The TokTok Project - Roadmap for c-toxcore</title>
+  <meta name="description" content="## v0.2.x### PRs to review:- [#1408](https://github.com/TokTok/c-toxcore/pull/1408) Documented the Tox handshake/AKE in docs/tox_handshake.md and added c…- [...">
+  <link rel="canonical" href="https://toktok.ltd/roadmap/c-toxcore.html">
+
+  
+  
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="../static/css/style.css" media="screen">
+
+  
+</head>
+
+  <body>
+    <nav class="navbar">
+  <div class="container-fluid limit-width">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">
+        <span class="fab fa-earlybirds"></span>
+        <span class="text">TokTok</span>
+      </a>
+      <input type="checkbox" id="hambox" class="navbar-toggle collapsed">
+      <label id="hamlabel" class="navbar-toggle collapsed fas fa-bars" for="hambox"></label>
+      <div class="tinynav navbar-toggle collapsed">
+        <ul class="nav navbar-nav">
+         
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="../mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+        </ul>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="../mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="content">
+      <div class="container-fluid limit-width lead">
+        <h3 id="v02x">v0.2.x</h3>
+
+<h4 id="prs-to-review">PRs to review:</h4>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1408">#1408</a> Documented the Tox handshake/AKE in docs/tox_handshake.md and added c…</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1401">#1401</a> WIP: add test of fallback use of TCP relays</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1385">#1385</a> WIP: Retarget ToxAV onto the Toxcore public API, avoid using internals.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1384">#1384</a> WIP: Put all crypto_core functions into its own namespace.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1351">#1351</a> Use standard cmake for static/shared lib selection</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1350">#1350</a> Fix clang-tidy warnings</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1335">#1335</a> WIP: new friend finding</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1333">#1333</a> cleanup friend loading</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1323">#1323</a> WIP: Improve file transfer speed</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1307">#1307</a> Split toxav_iterate into audio and video part</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1300">#1300</a> Remove VLAs from Messenger.c</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1263">#1263</a> VLA cleanup part 1.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1244">#1244</a> WIP: Upgrade toxav: multi-codec (VP8, H264), thread safety, lower latency, less distortion</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1243">#1243</a> Capabilities Packet</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1193">#1193</a> WIP: Refactoring+Removal of duplicate checks</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1148">#1148</a> WIP: investigating auto_tox_many_tcp_test failure</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/909">#909</a> WIP: copy proxy_host and savedata_data</li>
+</ul>
+
+<h4 id="planned-tasks">Planned tasks:</h4>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1286">#1286</a> Own messages sometimes aren’t received in group</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1280">#1280</a> Friend request from Trifa to qTox never arrives</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1270">#1270</a> Streams</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1260">#1260</a> Proposal: DHT Announcements</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1259">#1259</a> Proposal: multidevice and (partial) offline messages</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1258">#1258</a> Proposal: TFCL [Tox Friend Capabilities Level]</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1257">#1257</a> friendlist access (add, delete, …) causes crashes sometimes</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1256">#1256</a> please add documentation to: bwcontroller.c</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1255">#1255</a> packet ranges not very clearly explained</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1254">#1254</a> Proposal: Tox MessageV2</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1253">#1253</a> function names misleading in ToxAV</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1252">#1252</a> Proposal: reduce Video corruption even more by negotating the reference frame between sender and receiver</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1251">#1251</a> WIP: ToxIdenticon - howto</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1250">#1250</a> running a normal tox node as tcp relay is not possible</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1249">#1249</a> PACKET_LOSSY_AV_RESERVED 8 # why?</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1248">#1248</a> payload_type hardcoded</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1247">#1247</a> toxcore removes message receipts and filetransfers from memory, when client has short network outage</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1246">#1246</a> Invalid bit rate prevents call</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1241">#1241</a> Proposal: PGC and Offline Messaging via IPFS.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1237">#1237</a> lib on system:</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1233">#1233</a> Socks proxy (tor) seems to be broken</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1232">#1232</a> Links to binaries</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1227">#1227</a> Resource exhaustion attack on TCP server</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1226">#1226</a> Strange ONION_RECV_3 packets</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1222">#1222</a> Protocol Extension Library</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1217">#1217</a> valgrind reports “Conditional jump or move depends on uninitialised value(s)”</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1200">#1200</a> Testing: Add/modify a test that reloads tox from save data before continuing</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1175">#1175</a> Investigate breakage caused by PGC</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1160">#1160</a> History sync via trusted node or another client</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1152">#1152</a> Overview of known vulnerabilities in the onion</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1149">#1149</a> uTox aborts on toxcore restart</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1146">#1146</a> TCP test hangs on netbsd.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1144">#1144</a> libmisc_tools.so not installed</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1121">#1121</a> Announce nodes can read public keys from onion data packets</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1118">#1118</a> Fix threading issues in tests caught by tsan (data race etc)</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1115">#1115</a> Packet ID 33 has no handler log</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1113">#1113</a> File transfers tend to fail on unstable networks</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1111">#1111</a> To save energy</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1087">#1087</a> Investigate whether mingw supports %zu.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1065">#1065</a> Android compile failed on Jenkins</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1045">#1045</a> a modification suggest</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1044">#1044</a> Unnecessary relays on file transfers</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1040">#1040</a> Random numbers should not be produced using <code class="highlighter-rouge">rng() % max</code>.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1027">#1027</a> Beginning with 0.2.4, a lot of errors are printed: Friend 1 is not online</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1026">#1026</a> Beginning with 0.2.4, a lot of errors are printed: attempted to send message with network family 10 (probably IPv6) on IPv4 socket</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/980">#980</a> Add a way to plug in additional savedata types into Messenger</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/974">#974</a> Remove most uses of unsized integer types</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/959">#959</a> Get rid of all VLAs</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/940">#940</a> ‘ERROR:net_crypto.c:send_lossless_packet’ without explanation</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/939">#939</a> API to detect if the selected proxy supports UDP</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/938">#938</a> [API] file kind should be of type FILE_KIND instead of uint32_t</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/919">#919</a> Feature request: send/receive opus/vpx encoded A/V frames from toxav instead of decoded frames</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/908">#908</a> make Tox_Options self contained</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/907">#907</a> use dll  abnormal  System.AccessViolationException win7 x32 but x64 no problem</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/904">#904</a> 2 qTox clients see each other online only after a delay of many minutes</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/896">#896</a> [feature suggestion] Have the API for the client to know if the message was sent or not</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/890">#890</a> Feature request: Contacts exchange.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/889">#889</a> Feature request: INLINE preview/notification</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/886">#886</a> Maybe need to set the stacksize for musl-libc</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/885">#885</a> Feature request: Receiving offline messages</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/882">#882</a> Feature proposal: tags for organizing conversations</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/880">#880</a> Building in cygwin</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/876">#876</a> Create a secure way to disclose vulnerabilities</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/871">#871</a> Segv in toxav on friend going offline during active call</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/870">#870</a> build with BUILD_TOXAV and BUILD_AV_TEST OFF failed</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/869">#869</a> Monolithic libtoxcore.so when built with cmake, 3 shared libs when built with autotools</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/865">#865</a> Empty names in group chats</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/860">#860</a> Disable the communication with other tox nodes.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/858">#858</a> Stardard way to get conference peer_list and to detect which peer joined/leaved the conference</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/856">#856</a> toxins and toxbot don’t come online when qTox is already online, using UDP on the same host</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/855">#855</a> Is tox ready for production or only for testing?</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/854">#854</a> Toxcore and thread safe (question)</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/848">#848</a> Rebase toxcore to libp2p</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/843">#843</a> [RFC] Capability flags and message V2, alternative implementation</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/842">#842</a> Bot Commands</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/840">#840</a> Remove mention of #426 from the readme</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/802">#802</a> General explanation about tox’s p2p?</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/786">#786</a> Make format strings msvc/mingw-happy</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/738">#738</a> Tox needs funding</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/706">#706</a> auto_tests/dht_test.c should not #include “DHT.c”</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/695">#695</a> Feature proposal: network bouncer</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/653">#653</a> toxencryptsave: Store scrypt parameters along with ciphertext</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/651">#651</a> Changelog doesn’t sort versions correctly</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/647">#647</a> Bootstrap succeeds even on isolated network</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/646">#646</a> [Question] What are the features that need to be worked on first? Try 2</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/645">#645</a> Tox direction?</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/644">#644</a> Network Throttle</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/639">#639</a> Add test case for #500 (bug causing some messages to never get a receipt)</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/619">#619</a> Popularity of Tox</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/612">#612</a> In file transfer, transmission of a file with long file name fails</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/608">#608</a> Clients keep going offline/online without an apparent reason</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/604">#604</a> Idea for real offline messaging without servers</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/601">#601</a> [Proposal] Support QUIC</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/599">#599</a> Error when linking against libtoxcore: undefined reference to symbol ‘crypto_hash_sha256’</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/597">#597</a> Support WebRTC ?</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/596">#596</a> Proposal for reworking the way onion paths are created</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/594">#594</a> [Proposal] Numbered messages to enforce message ordering</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/593">#593</a> [Proposal] Be able to reject a friend request, then later accept a friend request from the same person</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/581">#581</a> [Proposal] Public channels</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/577">#577</a> Feature request: I2P integration via i2pd</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/570">#570</a> tests fail on openbsd 6.1</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/568">#568</a> Feature request: Conference like on Skype</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/558">#558</a> tox_friend_send_lossless_packet return true, but send message failed</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/547">#547</a> Use guard nodes</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/541">#541</a> Dynamically adjust contact presence timeout</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/540">#540</a> Stop deleting source files</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/532">#532</a> Could it be more stable and fast?</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/531">#531</a> Understand and discuss “Tox specification” and rebuild it better!!</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/527">#527</a> toxcore cannot bootstrap with UDP when connected to DNS64/NAT64</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/522">#522</a> Add ability to go invisible for some contacts</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/520">#520</a> An advice to  improve audio and video quality in p2p system</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/518">#518</a> tox.h is missing documentation.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/517">#517</a> Tox should be resilient to Sybil attack.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/516">#516</a> Loosing connectivity with all contacts forever, being online</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/499">#499</a> [suggestion] Define Tox API in a structured form</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/484">#484</a> Status callbacks called before status updated</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/469">#469</a> When using SOCKS5 proxy, do name resolution through the proxy</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/466">#466</a> Link multiple devices or clients belonging to one person together (MULTIDEVICE)</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/451">#451</a> Don’t fail when building toxcore on windows with <code class="highlighter-rouge">cmake .</code></li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/440">#440</a> toxcore continuously disconnects from the network and tries to connect again</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/438">#438</a> Fix file transfers</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/426">#426</a> Tox Handshake Vulnerable to KCI</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/423">#423</a> Toxcore should be able to search the LAN for DHT nodes, and bootstrap off them as needed.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/419">#419</a> Message bytes and sizes sent over the network should be indistinguishable from the random stream</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/417">#417</a> OVERHEAD development process.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/416">#416</a> Add an <code class="highlighter-rouge">enable_tcp</code> option in <code class="highlighter-rouge">Tox_Options</code>, default true</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/408">#408</a> Consider using Noise protocol construction for KE</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/405">#405</a> Remove all¹ uses of global state in toxcore</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/402">#402</a> Pre-Release Checklist.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/389">#389</a> Suspicious NULL check in net_crypto</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/384">#384</a> Document questions and answers related to crypto and p2p networking</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/371">#371</a> Create a test node setup script or program</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/359">#359</a> Unused shared libraries</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/358">#358</a> Network settings can’t be changed without creating new Tox instance</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/356">#356</a> Improving security through better use of nonces</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/352">#352</a> Strange checks in Messenger.c</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/350">#350</a> Configure coverity runs for nightly builds</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/349">#349</a> Run clang-tidy on Travis with specific warnings as errors.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/339">#339</a> Use libev for the event loop.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/283">#283</a> Tox cannot connect</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/273">#273</a> Make Tox_Options struct opaque: remove definition from tox.h, leaving only declaration</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/264">#264</a> Replace nospam with POW system</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/259">#259</a> Add option to allow binding tox-bootstrapd to specific IPs</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/258">#258</a> Add a way to verify ToxIDs</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/246">#246</a> Add an option to make toxcore use a test network</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/239">#239</a> LAN detection does not work</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/238">#238</a> Implement session rekeying</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/236">#236</a> Tox file transfers do not use available bandwidth</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/234">#234</a> Implement ToS (Type of Service) style priorities in the protocol</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/232">#232</a> Fix automatic bitrate management in ToxAV</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/231">#231</a> Contacts are shown offline after being idle for some time (networking issue)</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/225">#225</a> Add public low latency API</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/222">#222</a> Make a new portable simple standard tox save format</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/219">#219</a> NAT traversal: cleanup old functions</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/214">#214</a> Deduplicate enums and typedefs from tox.h and lower layers</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/211">#211</a> Toxcore needs a red team</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/198">#198</a> Crash on call while peer calling you</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/197">#197</a> UDP requests are received through X IPv6 address, but replies to them are sent back through Y IPv6 address</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/195">#195</a> UDP hole punching incompatible with cheap hardware routers</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/169">#169</a> Get rid of TOX_USER_STATUS_BUSY + 1</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/168">#168</a> Make realloc_tox_array catch overflows</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/167">#167</a> Const-ify pointers</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/152">#152</a> Backwards compatibility tests.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/128">#128</a> Toxcore should provide an easy, local method for making sure Travis checks will pass</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/124">#124</a> Don’t include OS specific headers in .h files</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/119">#119</a> Clearer separation of toxcore layers and stable APIs between them</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/112">#112</a> Add alias support</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/106">#106</a> Sometimes Toxcore reports the wrong connection status for both the DHT, and friends.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/92">#92</a> Multidevice and more: Call management</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/86">#86</a> Freenet as Offline Messaging Backend</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/85">#85</a> Reproducible Builds // OBS a bad Idea</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/14">#14</a> Reconsider the use of pthread</li>
+</ul>
+
+<h3 id="v030">v0.3.0</h3>
+
+<h4 id="prs-to-review-1">PRs to review:</h4>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1170">#1170</a> WIP: TCP support for DHT-based new group chats</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/217">#217</a> WIP: DHT-based new group chats without TCP support (UDP only)</li>
+</ul>
+
+<h4 id="planned-tasks-1">Planned tasks:</h4>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1265">#1265</a> NGC: Ensure that all group chats callbacks correctly pass user data</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1190">#1190</a> NGC: Don’t invoke callbacks from functions other than <code class="highlighter-rouge">tox_iterate</code>.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1186">#1186</a> NGC: Add more context to <code class="highlighter-rouge">TODO: ???</code></li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1184">#1184</a> NGC: Fix vanilla NaCl builds</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1183">#1183</a> NGC: Investigate use of <code class="highlighter-rouge">mono_time_update</code> in group chats</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1181">#1181</a> NGC: Document all enumerators of error codes and other enums.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1180">#1180</a> NGC: Return undefined value on failure.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1179">#1179</a> NGC: Make <code class="highlighter-rouge">struct Group_Chat_Self_Peer_Info</code> private.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1178">#1178</a> NGC: Use only named types for callbacks</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1177">#1177</a> NGC: Move structs out of headers back into .c files</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1176">#1176</a> NGC: Disentangle onion_client and group chats</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1174">#1174</a> NGC: Replace “fprintf” calls in with appropriate LOGGER_* calls.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1173">#1173</a> NGC: Bring tox.api.h up to date with tox.h.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1172">#1172</a> NGC: Fix memory leaks.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1171">#1171</a> NGC: Fix heap-use-after-free bug in tox_kill path</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1167">#1167</a> NGC: Update spec on New Group Chats to account for changes done to get TCP working</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/655">#655</a> Review all public API for 0.3.0</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/513">#513</a> Implement client capability packet</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/492">#492</a> [Feature request] Allow sending messages with (nearly) unlimited size</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/475">#475</a> [suggestion] Better Tor integration</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/441">#441</a> Add an option to disable relaying onion traffic</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/437">#437</a> [suggestion] Have ‘Network Id’ sent with all requests</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/428">#428</a> [feature request] Have a ‘message sent’ timestamp</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/203">#203</a> ToxAV is still on the old API style</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/199">#199</a> allow notification of when a message has been read</li>
+</ul>
+
+<h3 id="backlog">Backlog</h3>
+
+<h4 id="prs-to-review-2">PRs to review:</h4>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore/pull/1420">#1420</a> Use public API for sending in BWC</li>
+</ul>
+
+<h4 id="planned-tasks-2">Planned tasks:</h4>
+
+<ul>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1412">#1412</a> limit avatar byte size in toxcore (65536 bytes), return error code if its over the size limit</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1410">#1410</a> 0.2.11 doesn’t install toxav and toxencryptsave</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1369">#1369</a> Make ToxAV implementation pluggable</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1367">#1367</a> Changelog is unaccessible</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1364">#1364</a> Change the group A/V API from Tox to ToxAV</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1363">#1363</a> More security for Tox - A public key for each contact</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1361">#1361</a> Group moderation</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1360">#1360</a> Add “reply, delete and edit message”</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1359">#1359</a> sudo systemctl start tox-bootstrapd.service failed</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1353">#1353</a> libtoxdns.a and libtoxav.a</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1348">#1348</a> return NULL when call tox_new()function</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1342">#1342</a> Feature request: Indicate latency of audio</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1341">#1341</a> feature request: group invitation to group</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1340">#1340</a> Proposal: Design Tox to be closer to Discord for usability</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1339">#1339</a> Proposal: c-tox core should indicate timeout when file transfers fail.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1338">#1338</a> tox-bootstrap daemon behind reverse proxy</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1337">#1337</a> join to group chat over group chat id</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1332">#1332</a> Padding bytes in Tox save format are not specified</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1328">#1328</a> Group titles in persistent groups</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1327">#1327</a> How many friends to support group chat at most？</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1318">#1318</a> Toxcore kills application</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1317">#1317</a> NGC: propose to change packet structure.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1308">#1308</a> Tox 0.2.9 silently skips tests</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1304">#1304</a> [Proposal] Have “in call” state for AV groups, don’t send audio data if peer not “in call”</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1301">#1301</a> I need a full list of dependencies.</li>
+  <li><a href="https://github.com/TokTok/c-toxcore/issues/1292">#1292</a> Feature Requrest: Real Time Text?</li>
+</ul>
+
+      </div>
+    </section>
+    
+    
+    
+  </body>
+  <footer id="footer" class="dark">
+  <div class="container-fluid limit-width">
+    <div class="languages"></div>
+
+    <div class="ext-med pull-left">
+      <a class="button" href="https://github.com/TokTok/c-toxcore" title="Star us on Github"><span class="icon fab fa-github"></span></a>
+      <a class="button" href="https://wiki.tox.chat/users/community#irc" title="Chat with us on IRC"><span class="icon fas fa-comments"></span></a>
+      <a class="button do-button" href="https://www.digitalocean.com/" title="Powered by DigitalOcean"><img class="button" src="../static/img/do.svg" /></a>
+    </div>
+
+    <div class="cc pull-right">
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="../static/img/CC.png"></a>
+      <br>
+      <p>This page was generated from
+        <a href="https://github.com/TokTok/website">
+          a file hosted in public GitHub repository
+        </a>
+        — issue tickets and pull requests are very welcome!
+      </p>
+    </div>
+  </div>
+</footer>
+
+</html>

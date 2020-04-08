@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The TokTok Project - Pull Requests</title>
+  <meta name="description" content="Click on a PR number (the # column) to see the pull request on GitHub. Clickon the branch to enter Reviewable.io and do a code review.    Icon legend        ...">
+  <link rel="canonical" href="https://toktok.ltd/pulls.html">
+
+  
+  
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="static/css/style.css" media="screen">
+
+  
+    <script defer src="static/js/pr-table.js"></script>
+  
+</head>
+
+  <body>
+    <nav class="navbar">
+  <div class="container-fluid limit-width">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <span class="fab fa-earlybirds"></span>
+        <span class="text">TokTok</span>
+      </a>
+      <input type="checkbox" id="hambox" class="navbar-toggle collapsed">
+      <label id="hamlabel" class="navbar-toggle collapsed fas fa-bars" for="hambox"></label>
+      <div class="tinynav navbar-toggle collapsed">
+        <ul class="nav navbar-nav">
+         
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li class="current">
+    <a href="pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+        </ul>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li class="current">
+    <a href="pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="content">
+      <div class="container-fluid limit-width lead">
+        <p>Click on a PR number (the # column) to see the pull request on GitHub. Click
+on the branch to enter Reviewable.io and do a code review.</p>
+
+<table>
+    <tr><th colspan="3">Icon legend</th></tr>
+    <tr>
+      <td>clean</td>
+      <td>can be merged</td>
+      <td>&#x2705;</td>
+    </tr>
+    <tr>
+      <td>behind</td>
+      <td>rebase needed</td>
+      <td>&#x1f4a4;</td>
+    </tr>
+    <tr>
+      <td>blocked</td>
+      <td>blocking status check failure</td>
+      <td>&#x1f6a7;</td>
+    </tr>
+    <tr>
+      <td>draft</td>
+      <td>author says it's not ready for review</td>
+      <td>&#x1f4dd;</td>
+    </tr>
+    <tr>
+      <td>dirty</td>
+      <td>merge conflict</td>
+      <td>&#x274c;</td>
+    </tr>
+    <tr>
+      <td>unknown</td>
+      <td>mergeability not yet checked</td>
+      <td>&#x231b;</td>
+    </tr>
+    <tr>
+      <td>unstable</td>
+      <td>non-blocking status check failure</td>
+      <td>&#x1f6a7;</td>
+    </tr>
+</table>
+
+<div class="tables-wrapper">
+  <p>Loading Pull requests...</p>
+  <noscript>
+    <p>Actually, we're not loading anything.
+    This page requires JavaScript to download the data for the PR table.
+    Please enable JavaScript and reload the page.</p>
+
+    <p>Alternatively, you can view the PRs for each repository on its page
+    under the <a href="https://github.com/TokTok">TokTok organisation</a> on
+    Github.</p>
+  </noscript>
+</div>
+
+<div class="pr-reload">
+  <a href="javascript:reloadPrTable()">&#8634;</a>
+</div>
+
+
+      </div>
+    </section>
+    
+    <!-- So js can load resources using relative paths. -->
+    <script>const relative = "";</script>
+    
+    
+    
+  </body>
+  <footer id="footer" class="dark">
+  <div class="container-fluid limit-width">
+    <div class="languages"></div>
+
+    <div class="ext-med pull-left">
+      <a class="button" href="https://github.com/TokTok/c-toxcore" title="Star us on Github"><span class="icon fab fa-github"></span></a>
+      <a class="button" href="https://wiki.tox.chat/users/community#irc" title="Chat with us on IRC"><span class="icon fas fa-comments"></span></a>
+      <a class="button do-button" href="https://www.digitalocean.com/" title="Powered by DigitalOcean"><img class="button" src="static/img/do.svg" /></a>
+    </div>
+
+    <div class="cc pull-right">
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="static/img/CC.png"></a>
+      <br>
+      <p>This page was generated from
+        <a href="https://github.com/TokTok/website">
+          a file hosted in public GitHub repository
+        </a>
+        — issue tickets and pull requests are very welcome!
+      </p>
+    </div>
+  </div>
+</footer>
+
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The TokTok Project - Mocking the Operating System</title>
+  <meta name="description" content="Creating a mock/fake implementation of the operating system functions to runsimulations and repeat recorded execution traces in toxcore.# ObjectiveThis desig...">
+  <link rel="canonical" href="https://toktok.ltd/designs/osmock.html">
+
+  
+  
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="../static/css/style.css" media="screen">
+
+  
+</head>
+
+  <body>
+    <nav class="navbar">
+  <div class="container-fluid limit-width">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">
+        <span class="fab fa-earlybirds"></span>
+        <span class="text">TokTok</span>
+      </a>
+      <input type="checkbox" id="hambox" class="navbar-toggle collapsed">
+      <label id="hamlabel" class="navbar-toggle collapsed fas fa-bars" for="hambox"></label>
+      <div class="tinynav navbar-toggle collapsed">
+        <ul class="nav navbar-nav">
+         
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="../mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+        </ul>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li>
+    <a href="../mission.html">
+      <span class="fas fa-align-left">&nbsp;</span>
+      Mission
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../pulls.html">
+      <span class="fas fa-code-branch">&nbsp;</span>
+      Pull Requests
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../spec.html">
+      <span class="fas fa-book">&nbsp;</span>
+      Protocol
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../documents.html">
+      <span class="fas fa-file-alt">&nbsp;</span>
+      Documents
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="../integrations.html">
+      <span class="fas fa-list-ul">&nbsp;</span>
+      Integrations
+    </a>
+  </li>
+  
+
+<li>
+  <a href="https://tox.chat">
+    <span class="fas fa-lock">&nbsp;</span>
+    Tox
+  </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <section id="content">
+      <div class="container-fluid limit-width lead">
+        <p>Creating a mock/fake implementation of the operating system functions to run
+simulations and repeat recorded execution traces in toxcore.</p>
+
+<h2 id="objective">Objective</h2>
+
+<p>This design proposes to create a layer below toxcore containing mock versions
+of all system calls used by toxcore. Doing this gives us two advantages:</p>
+
+<ol>
+  <li>The operating system specific code is factored out, and none of the
+implementation files <code class="highlighter-rouge">#include</code>s system headers other than libc and
+library dependencies (opus, vpx).</li>
+  <li>None of the toxcore code performs any system calls directly, without going
+through this layer.</li>
+</ol>
+
+<p>The first advantage allows us to test the OS-specific code independently from
+the portable code. Once we validated that the I/O code does I/O the right way,
+we can assume correctness and no longer need to test it through toxcore as
+thoroughly as before. We’ll still want integration tests that test toxcore’s
+integration with this layer, but most functional tests can become pure non-I/O
+tests. This will give an immense speedup of tests, improving developer
+velocity.</p>
+
+<p>The second point allows us to record exactly what system calls toxcore makes,
+together with the system’s responses, in an execution trace. We can then later
+replay this trace to reproduce bugs. We can also use stored execution traces
+to ensure that toxcore behaves the same for the same input.</p>
+
+<p>Not only can we reproduce the exact same code execution, but we can also
+modify it slightly. This allows us to simulate arbitrary error conditions.
+Perhaps most interestingly, since <code class="highlighter-rouge">malloc</code> is potentially a system call, we
+will include it in the mock layer, allowing us to repeatedly execute the same
+trace, each time with an increasing number of successful mallocs. This allows
+us to test a large number of possible allocation failure handling paths, much
+more precisely than we would by just setting process resource limits.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Requirements for the solution:</p>
+
+<ul>
+  <li>It should include <em>all</em> potential system calls, including libsodium/nacl
+random functions such as key generation.</li>
+  <li>It should not add more than 50ns of latency to actual system calls when
+not recording or replaying a trace. The <code class="highlighter-rouge">gettimeofday</code> system call on
+Linux takes about 50ns, so we take that as a benchmark.</li>
+  <li>Recording a trace should be sufficiently low overhead such that we can
+record the trace of a multimedia (A/V) call without noticable delay.</li>
+  <li>It should be able to record toxcore API calls, so that we can replay the
+activity of any API user without having to manually reproduce the API
+calls that led to the execution.</li>
+  <li>The remainder of the code, i.e. everything except the OS layer, should no
+longer contain any platform-specific code. This includes LAN discovery
+code.</li>
+</ul>
+
+<p>Specifically the LAN discovery code contains larger platform-specific
+functions that will need to move into the platform module.</p>
+
+<p>This proposal makes toxcore itself deterministic during tests, but not any of
+the library code it calls. The crypto library we use is deterministic apart
+from random number generation, which we will include in the platform
+interface. However, for A/V calls, we use non-deterministic libraries such as
+libvpx, which observes timing of its own execution to influence its internal
+decisions. E.g. if encoding a frame takes too long, it will reduce video
+quality. This poses a challenge for this proposal. For this reason, we will
+defer toxav to a later stage and focus on toxcore only at this point. There is
+a rough plan for toxav to be built purely on top of the core API in the
+future, instead of using toxcore internals. If we make that happen, we may
+never need to instrument toxav code.</p>
+
+<h2 id="design-ideas">Design Ideas</h2>
+
+<p>All functions in toxcore that allocate memory or otherwise perform system
+calls will be changed to receive as first parameter <code class="highlighter-rouge">const Env *env</code>. This
+environment pointer contains pointers to system functions such as <code class="highlighter-rouge">malloc</code>.
+The API of these functions may differ slightly from the actual platform calls,
+as they need to be abstract enough to support all current platforms.</p>
+
+<p>The new <code class="highlighter-rouge">env.c</code> module contains static <code class="highlighter-rouge">env_$name</code> functions for each of the
+<code class="highlighter-rouge">$name</code> members of the <code class="highlighter-rouge">Env</code> struct, i.e.:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Env</span> <span class="p">{</span>
+  <span class="kt">void</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">malloc</span><span class="p">)(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+  <span class="p">...</span>
+<span class="p">}</span> <span class="n">Env</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="o">*</span><span class="nf">env_malloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Env</span> <span class="n">env_default</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">env_malloc</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">Env</span> <span class="o">*</span><span class="nf">env_new</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Env</span> <span class="o">*</span><span class="n">env</span> <span class="o">=</span> <span class="p">(</span><span class="n">Env</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Env</span><span class="p">));</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">env</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">*</span><span class="n">env</span> <span class="o">=</span> <span class="n">env_default</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">env</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The env object can record the execution trace and be able to replay it. To
+avoid mixing the platform code with trace code, we will create a separate
+module called <code class="highlighter-rouge">trace.c</code> that wraps an env in tracing code. This also avoids
+the overhead of checking a “tracing” flag on every call. The only overhead
+remaining is that of an indirect call. This brings the maximum overhead to
+100ns in case of a cache miss, but in reality these functions will be cached
+most of the time, making the overhead per call less than 10ns on <code class="highlighter-rouge">x86_64</code>.</p>
+
+<p>Since toxav uses toxcore internals, it will pass <code class="highlighter-rouge">&amp;env_default</code> as the env
+parameter. This means calls originating from toxav will not be traced for the
+time being, making a trace including toxav activity of limited use. This is
+acceptable as long as we ensure that an inactive toxav does not interfere with
+toxcore in any externally observable way, i.e. it does not cause allocations
+or network I/O unless asked to by either toxcore or the client code.</p>
+
+<h3 id="fuzzing">Fuzzing</h3>
+
+<p>Making toxcore a pure function of its input, i.e. the execution trace, enables
+fuzzing inputs. We can make use of instrumentation fuzzers such as afl-fuzz to
+find bugs in branches taken rarely.</p>
+
+<h3 id="spectest">SpecTest</h3>
+
+<p>As part of extending the hstox reference implementation, we will generate
+simulation input from hstox. This operates at a slightly higher level and
+doesn’t need to mock malloc and random number generators, but injects
+hstox-generated network messages into the receive queue of the system under
+test (i.e. toxcore). Using QuickCheck, we can explore properties of the entire
+system, checked against the Haskell reference implementation.</p>
+
+<h2 id="alternatives-considered">Alternatives Considered</h2>
+
+<h3 id="doing-nothing">Doing nothing</h3>
+
+<p>If we don’t do this, we will continue having flaky tests that need to execute
+2-3 times before they pass, and debugging crashes remains hard, since we need
+to manually reproduce the environment they were observed in.</p>
+
+<h3 id="env-library">Env library</h3>
+
+<p>Instead of adding parameters to all functions, we could also create an <code class="highlighter-rouge">env</code>
+library containing <code class="highlighter-rouge">env_malloc</code> as a global function. The advantage is
+implementation simplicity: we don’t need to change the signature of just about
+every function in toxcore. The disadvantage is that it will need to use global
+mutable state to record the trace, making thread-safety an issue. To
+distinguish env calls from two different Tox instances, we need to assign the
+instances unique identifiers. Doing this in a thread-safe way requires global
+locks and more platform-specific code.</p>
+
+      </div>
+    </section>
+    
+    
+    
+  </body>
+  <footer id="footer" class="dark">
+  <div class="container-fluid limit-width">
+    <div class="languages"></div>
+
+    <div class="ext-med pull-left">
+      <a class="button" href="https://github.com/TokTok/c-toxcore" title="Star us on Github"><span class="icon fab fa-github"></span></a>
+      <a class="button" href="https://wiki.tox.chat/users/community#irc" title="Chat with us on IRC"><span class="icon fas fa-comments"></span></a>
+      <a class="button do-button" href="https://www.digitalocean.com/" title="Powered by DigitalOcean"><img class="button" src="../static/img/do.svg" /></a>
+    </div>
+
+    <div class="cc pull-right">
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"><img src="../static/img/CC.png"></a>
+      <br>
+      <p>This page was generated from
+        <a href="https://github.com/TokTok/website">
+          a file hosted in public GitHub repository
+        </a>
+        — issue tickets and pull requests are very welcome!
+      </p>
+    </div>
+  </div>
+</footer>
+
+</html>
