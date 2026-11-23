@@ -33,11 +33,11 @@ jobs:
       - name: Extract _site directory from docker image
         run: docker run --rm --entrypoint tar toxchat/toktok.github.io:latest -C /home/builder/build -c _site | tar -x
       - name: Set-up Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
       - name: Deploy GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

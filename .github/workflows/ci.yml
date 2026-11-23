@@ -26,7 +26,7 @@ jobs:
       - name: Extract _site directory from docker image
         run: docker run --rm --entrypoint tar toxchat/toktok.github.io:latest -C /home/builder/build -c _site | tar -x
       - name: Upload _site to artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: _site
           path: _site
